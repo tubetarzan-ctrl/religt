@@ -1,27 +1,239 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* ==========================================================
+   THEME ENGINE (Section 5.4) — admin selects a theme in
+   Admin Panel → Settings → Appearance; the choice is stored in
+   site_settings.active_theme and rendered server-side as
+   <body data-theme="..."> in app/layout.tsx — zero flash, no
+   client fetch. Every color anywhere on the public site must
+   resolve from this fixed 19-variable set, never a hardcoded hex.
+   ========================================================== */
+:root, body[data-theme="emerald-gold"] {
+  --bg: #faf7f0; --surface: #ffffff;
+  --primary: #0e6b5c; --primary-dark: #0a4f44; --primary-soft: #e7f1ee;
+  --accent: #c9a24b; --accent-soft: #f6eedc; --accent-ink: #8a6a1f;
+  --ink: #1c2a27; --ink-soft: #5a6b67; --line: #e8e2d6;
+  --hero-g1: #0a4f44; --hero-g2: #0e6b5c; --hero-g3: #12806e;
+  --hero-text: #d7e6e1; --hero-muted: #bfd6cf;
+  --footer-bg: #10221e; --footer-text: #9fb8b1;
+  --on-primary: #ffffff; --on-accent: #ffffff;
+}
+body[data-theme="pure-light"] {
+  --bg: #f7f9fb; --surface: #ffffff;
+  --primary: #0f6fb8; --primary-dark: #0a5490; --primary-soft: #e5f0f9;
+  --accent: #e8a33d; --accent-soft: #fbf0dc; --accent-ink: #8f6318;
+  --ink: #152230; --ink-soft: #5c6b7a; --line: #e3e9ef;
+  --hero-g1: #0a5490; --hero-g2: #0f6fb8; --hero-g3: #1b84d4;
+  --hero-text: #d9e9f6; --hero-muted: #bfd9ee;
+  --footer-bg: #122334; --footer-text: #9db2c4;
+  --on-primary: #ffffff; --on-accent: #ffffff;
+}
+body[data-theme="dark-emerald"] {
+  --bg: #0d1613; --surface: #14211d;
+  --primary: #2fbfa0; --primary-dark: #1e9a80; --primary-soft: #1a2e29;
+  --accent: #d9b25c; --accent-soft: #2b2416; --accent-ink: #d9b25c;
+  --ink: #edf4f1; --ink-soft: #93a8a1; --line: #22332e;
+  --hero-g1: #0a1f1a; --hero-g2: #123b33; --hero-g3: #175045;
+  --hero-text: #c9dcd6; --hero-muted: #8fa8a0;
+  --footer-bg: #08110e; --footer-text: #7e948d;
+  --on-primary: #06231c; --on-accent: #2b2005;
+}
+body[data-theme="black-gold"] {
+  --bg: #0b0b0b; --surface: #151412;
+  --primary: #c9a24b; --primary-dark: #a8863a; --primary-soft: #252015;
+  --accent: #e4c878; --accent-soft: #2a2415; --accent-ink: #e4c878;
+  --ink: #f3eee2; --ink-soft: #a79e8c; --line: #2a2721;
+  --hero-g1: #0b0b0b; --hero-g2: #1a1610; --hero-g3: #2b2312;
+  --hero-text: #d9cfb8; --hero-muted: #a79e8c;
+  --footer-bg: #070707; --footer-text: #8c8474;
+  --on-primary: #1f1704; --on-accent: #1f1704;
+}
+body[data-theme="royal-navy"] {
+  --bg: #f5f7fa; --surface: #ffffff;
+  --primary: #1b2e5b; --primary-dark: #122043; --primary-soft: #e8ecf5;
+  --accent: #c9a24b; --accent-soft: #f6eedc; --accent-ink: #8a6a1f;
+  --ink: #18202e; --ink-soft: #5a6577; --line: #e2e7ef;
+  --hero-g1: #122043; --hero-g2: #1b2e5b; --hero-g3: #27407a;
+  --hero-text: #d5ddec; --hero-muted: #aebad3;
+  --footer-bg: #0e1731; --footer-text: #94a1bb;
+  --on-primary: #ffffff; --on-accent: #ffffff;
+}
+body[data-theme="karbala-maroon"] {
+  --bg: #fbf6f3; --surface: #ffffff;
+  --primary: #7a1f2b; --primary-dark: #5c1620; --primary-soft: #f5e7e9;
+  --accent: #c9a24b; --accent-soft: #f6eedc; --accent-ink: #8a6a1f;
+  --ink: #2a1b1d; --ink-soft: #6e5a5d; --line: #ebdfd9;
+  --hero-g1: #5c1620; --hero-g2: #7a1f2b; --hero-g3: #93293a;
+  --hero-text: #f0dbde; --hero-muted: #d7b3b8;
+  --footer-bg: #2a0f14; --footer-text: #b39397;
+  --on-primary: #ffffff; --on-accent: #ffffff;
+}
+body[data-theme="desert-sand"] {
+  --bg: #f6f1e7; --surface: #fffdf8;
+  --primary: #8a6237; --primary-dark: #6b4a27; --primary-soft: #f0e7d8;
+  --accent: #3e7c59; --accent-soft: #e3efe7; --accent-ink: #2c5940;
+  --ink: #2e251a; --ink-soft: #75695a; --line: #e7dcc8;
+  --hero-g1: #6b4a27; --hero-g2: #8a6237; --hero-g3: #a87c48;
+  --hero-text: #f0e5d4; --hero-muted: #d6c4a8;
+  --footer-bg: #2b2115; --footer-text: #b3a58e;
+  --on-primary: #ffffff; --on-accent: #ffffff;
+}
+body[data-theme="midnight-silver"] {
+  --bg: #0e1220; --surface: #171c2e;
+  --primary: #8fa6d9; --primary-dark: #6d88c4; --primary-soft: #1e2540;
+  --accent: #c8cedc; --accent-soft: #242b45; --accent-ink: #c8cedc;
+  --ink: #eaeef7; --ink-soft: #8e97af; --line: #252c47;
+  --hero-g1: #0a0e1a; --hero-g2: #131a30; --hero-g3: #1c2547;
+  --hero-text: #c8d1e6; --hero-muted: #8e9ab8;
+  --footer-bg: #080b14; --footer-text: #7b849c;
+  --on-primary: #0b1226; --on-accent: #0b1226;
+}
+body[data-theme="teal-coral"] {
+  --bg: #f6faf9; --surface: #ffffff;
+  --primary: #0e7c7b; --primary-dark: #0a5e5d; --primary-soft: #e3f2f1;
+  --accent: #e4674e; --accent-soft: #fce9e4; --accent-ink: #b24028;
+  --ink: #173230; --ink-soft: #5b7370; --line: #dfebe9;
+  --hero-g1: #0a5e5d; --hero-g2: #0e7c7b; --hero-g3: #13a09e;
+  --hero-text: #d2ecec; --hero-muted: #a6d4d2;
+  --footer-bg: #0c2b2a; --footer-text: #8db0ae;
+  --on-primary: #ffffff; --on-accent: #ffffff;
+}
+body[data-theme="mono-slate"] {
+  --bg: #f4f5f6; --surface: #ffffff;
+  --primary: #2e3b47; --primary-dark: #1f2a34; --primary-soft: #e8ebee;
+  --accent: #6b7b8c; --accent-soft: #ecf0f3; --accent-ink: #46586b;
+  --ink: #1c2530; --ink-soft: #61707f; --line: #e1e6ea;
+  --hero-g1: #1f2a34; --hero-g2: #2e3b47; --hero-g3: #3d4e5e;
+  --hero-text: #d6dde3; --hero-muted: #a9b5c0;
+  --footer-bg: #141c24; --footer-text: #8b99a7;
+  --on-primary: #ffffff; --on-accent: #ffffff;
+}
+
+@layer base {
+  :root {
+    --radius-brand: 14px;
+    --shadow-sm-brand: 0 6px 30px rgba(15, 20, 18, 0.08);
+    --shadow-lg-brand: 0 16px 50px rgba(15, 20, 18, 0.16);
+
+    /* Back-compat aliases — every existing component already reads these
+       brand-* tokens, so pointing them at the 19 canonical theme variables
+       above means the whole site re-themes with zero per-component edits. */
+    --rt-bg: var(--bg);
+    --rt-bg-elevated: var(--surface);
+    --rt-primary: var(--primary);
+    --rt-accent: var(--accent);
+    --rt-text: var(--ink);
+    --rt-text-muted: var(--ink-soft);
+    --rt-radius: var(--radius-brand);
+    --rt-shadow-card: var(--shadow-sm-brand);
+
+    /* shadcn tokens */
+    --background: var(--bg);
+    --foreground: var(--ink);
+    --card: var(--surface);
+    --card-foreground: var(--ink);
+    --popover: var(--surface);
+    --popover-foreground: var(--ink);
+    --primary: var(--primary);
+    --primary-foreground: var(--on-primary);
+    --secondary: var(--primary-soft);
+    --secondary-foreground: var(--ink);
+    --muted: var(--surface);
+    --muted-foreground: var(--ink-soft);
+    --accent: var(--accent);
+    --accent-foreground: var(--on-accent);
+    --destructive: #b3432e;
+    --destructive-foreground: #ffffff;
+    --border: var(--line);
+    --input: var(--line);
+    --ring: var(--primary);
+    --radius: var(--radius-brand);
+  }
+
+  /* Admin panel keeps its own fixed dark "software dashboard" theme,
+     independent of the public site's active theme — scoped override so
+     every existing admin component (border-white/10 etc.) keeps working
+     unchanged regardless of which of the 10 public themes is selected. */
+  .admin-theme {
+    --rt-bg: #0b0f14;
+    --rt-bg-elevated: #131922;
+    --rt-text: #f4f1ea;
+    --rt-text-muted: #9ba3ae;
+    --rt-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+
+    --background: var(--rt-bg);
+    --foreground: var(--rt-text);
+    /* body's `text-foreground` already computed its color using the public
+       site's (light) theme, since .admin-theme only lives on a child div —
+       without this, every admin element with no explicit text-* class
+       inherits that wrong dark-on-dark color instead of re-resolving here. */
+    color: var(--foreground);
+    background-color: var(--background);
+    --card: var(--rt-bg-elevated);
+    --card-foreground: var(--rt-text);
+    --popover: var(--rt-bg-elevated);
+    --popover-foreground: var(--rt-text);
+    --secondary: var(--rt-bg-elevated);
+    --secondary-foreground: var(--rt-text);
+    --muted: var(--rt-bg-elevated);
+    --muted-foreground: var(--rt-text-muted);
+    --accent-foreground: #0b0f14;
+    --border: rgba(244, 241, 234, 0.1);
+    --input: rgba(244, 241, 234, 0.14);
+  }
+
+  /* Admin light mode — toggled client-side, see AdminThemeToggle. */
+  .admin-theme-light {
+    --rt-bg: #f5f5f4;
+    --rt-bg-elevated: #ffffff;
+    --rt-text: #1a1a1a;
+    --rt-text-muted: #6b6b6b;
+    --rt-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+
+    --background: var(--rt-bg);
+    --foreground: var(--rt-text);
+    color: var(--foreground);
+    background-color: var(--background);
+    --card: var(--rt-bg-elevated);
+    --card-foreground: var(--rt-text);
+    --popover: var(--rt-bg-elevated);
+    --popover-foreground: var(--rt-text);
+    --secondary: var(--rt-bg-elevated);
+    --secondary-foreground: var(--rt-text);
+    --muted: var(--rt-bg-elevated);
+    --muted-foreground: var(--rt-text-muted);
+    --accent-foreground: #ffffff;
+    --border: rgba(0, 0, 0, 0.1);
+    --input: rgba(0, 0, 0, 0.14);
+  }
+  .admin-theme-light [class*="border-white/"] {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  .admin-theme-light [class*="hover:bg-white/"]:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    transition: background 0.35s, color 0.35s;
+  }
+  html {
+    @apply font-body;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
   }
 }

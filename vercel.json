@@ -1,0 +1,9 @@
+{
+  "crons": [
+    { "path": "/api/cron/revalidate-landing-pages", "schedule": "0 0 * * *" },
+    { "path": "/api/cron/trip-completion", "schedule": "15 0 * * *" },
+    { "path": "/api/cron/payment-reminders", "schedule": "0 9 * * *" },
+    { "path": "/api/cron/passport-expiry-alerts", "schedule": "30 0 * * *" },
+    { "path": "/api/cron/chatbot-knowledge-digest", "schedule": "0 6 * * *" }
+  ]
+}
