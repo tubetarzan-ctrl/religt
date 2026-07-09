@@ -9,7 +9,7 @@ export async function sendAutoReply(to: string, subject: string, body: string) {
 
   const resend = new Resend(apiKey);
   await resend.emails.send({
-    from: "Religious Tours <inquiries@religioustours.com>",
+    from: "S.Religious Tours <inquiries@religioustours.com>",
     to,
     subject: `Re: ${subject}`,
     text: body,

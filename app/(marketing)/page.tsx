@@ -9,7 +9,7 @@ import { verticals, sunniGroupTours } from "@/lib/content/verticals";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Religious Tours — Iraq & Iran Ziarat, Umrah, Sunni Group Tours, Visas",
+  title: "S.Religious Tours — Iraq & Iran Ziarat, Umrah, Sunni Group Tours, Visas",
   description:
     "Choose your journey: Shia-oriented Iraq & Iran Ziarat groups, Umrah packages, Sunni Group Tours, air tickets, and visa services — all with verified departures and transparent pricing.",
 };

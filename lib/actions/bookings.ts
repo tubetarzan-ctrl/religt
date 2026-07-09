@@ -1,6 +1,7 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/admin";
+import { syncTourEventKnowledge } from "@/lib/chatbot/knowledge-sync";
 
 export interface BookingFormState {
   status: "idle" | "success" | "error";
@@ -54,6 +55,8 @@ export async function createBooking(
     source: "form",
     status: "open",
   });
+
+  await syncTourEventKnowledge(tourEventId);
 
   return { status: "success", bookingId: data.id };
 }

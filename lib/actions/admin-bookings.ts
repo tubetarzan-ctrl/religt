@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { syncTourEventKnowledge } from "@/lib/chatbot/knowledge-sync";
 
 async function requireStaffUser() {
   const supabase = await createClient();
@@ -34,6 +35,8 @@ export async function updateBookingStatus(bookingId: string, status: string) {
     after_state: { ...before, ...patch },
   });
 
+  if (before?.tour_event_id) await syncTourEventKnowledge(before.tour_event_id);
+
   revalidatePath("/admin/bookings");
   revalidatePath(`/admin/bookings/${bookingId}`);
 }
@@ -54,6 +57,8 @@ export async function deleteBooking(bookingId: string) {
     before_state: before,
     after_state: null,
   });
+
+  if (before?.tour_event_id) await syncTourEventKnowledge(before.tour_event_id);
 
   revalidatePath("/admin/bookings");
 }

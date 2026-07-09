@@ -310,6 +310,9 @@ export interface Database {
           vertical: string | null;
           hit_count: number;
           created_at: string;
+          tour_event_id: string | null;
+          source: "manual" | "tour_event_sync" | "ai_cache";
+          normalized_question: string | null;
         };
         Insert: Partial<Database["public"]["Tables"]["chatbot_knowledge"]["Row"]> & {
           question_pattern: string;

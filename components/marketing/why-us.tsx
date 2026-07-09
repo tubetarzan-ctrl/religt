@@ -7,7 +7,7 @@ export function WhyUs({ items }: { items: WhyUsItem[] }) {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary before:h-px before:w-[26px] before:bg-accent">
-            Why Religious Tours
+            Why S.Religious Tours
           </p>
           <h2 className="mt-2.5 font-heading text-[clamp(28px,4vw,42px)] leading-[1.15] text-ink">
             What no other operator in Pakistan offers

@@ -110,7 +110,7 @@ export async function UpcomingDepartures({ vertical }: { vertical: Vertical }) {
                           <small className="text-xs text-ink-soft">quad sharing · p.p.</small>
                         </div>
                         <Button asChild className="rounded-full bg-primary text-on-primary hover:bg-primary-dark">
-                          <Link href={`/book/${event.slug}`}>Reserve</Link>
+                          <Link href={`/book/${encodeURIComponent(event.slug)}`}>Reserve</Link>
                         </Button>
                       </div>
                     </div>

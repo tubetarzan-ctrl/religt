@@ -88,7 +88,7 @@ export function ReviewSubmissionDialog({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button variant="outline" className="border-brand-accent/40 text-brand-accent hover:bg-brand-accent/10">
+          <Button variant="outline" className="border-brand-accent/40 text-accent-ink hover:bg-brand-accent/10">
             Share Your Experience
           </Button>
         }
@@ -156,7 +156,7 @@ export function ReviewSubmissionDialog({
                 {[1, 2, 3, 4, 5].map((n) => (
                   <button key={n} type="button" onClick={() => setRating(n)}>
                     <Star
-                      className={`h-6 w-6 ${n <= rating ? "fill-brand-accent text-brand-accent" : "text-brand-text-muted"}`}
+                      className={`h-6 w-6 ${n <= rating ? "fill-accent-ink text-accent-ink" : "text-brand-text-muted"}`}
                     />
                   </button>
                 ))}

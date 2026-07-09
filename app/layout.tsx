@@ -27,11 +27,12 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: {
-    default: "Religious Tours — Iraq & Iran Ziarat, Umrah, Visas & Air Tickets",
-    template: "%s | Religious Tours",
+    default: "S.Religious Tours — Iraq & Iran Ziarat, Umrah, Visas & Air Tickets",
+    template: "%s | S.Religious Tours",
   },
   description:
     "Pakistan-based Islamic travel agency offering Iraq & Iran Ziarat groups, Umrah packages, Sunni Group Tours, air tickets, and visa services — with verified departures and transparent pricing.",
+  icons: { icon: "/logo.jpg" },
 };
 
 export default async function RootLayout({

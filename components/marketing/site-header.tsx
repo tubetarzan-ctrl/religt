@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { verticals, sunniGroupTours } from "@/lib/content/verticals";
@@ -27,10 +28,10 @@ export function SiteHeader() {
     <nav className="sticky top-0 z-40 border-b border-line bg-bg/90 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2.5 whitespace-nowrap font-heading text-2xl text-primary">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-base text-accent">
-            ☪
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm transition-transform duration-300 hover:rotate-[8deg] hover:scale-110">
+            <Image src="/logo.jpg" alt="S.Religious Tours logo" width={36} height={36} className="h-full w-full object-cover" priority />
           </span>
-          Religious Tours
+          S.Religious Tours
         </Link>
 
         <div className="hidden gap-5 whitespace-nowrap text-[14px] font-semibold text-ink-soft xl:flex xl:gap-6">

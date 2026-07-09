@@ -21,7 +21,7 @@ export function FaqSection({ items }: { items: FaqItem[] }) {
               <details className="group mb-3 overflow-hidden rounded-xl border border-line bg-surface" open={i === 0}>
                 <summary className="flex cursor-pointer list-none items-center justify-between px-6 py-5 text-[15.5px] font-bold text-ink [&::-webkit-details-marker]:hidden">
                   {item.question}
-                  <span className="ml-4 shrink-0 text-2xl text-accent transition-transform group-open:rotate-45">+</span>
+                  <span className="ml-4 shrink-0 text-2xl text-accent-ink transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <div className="px-6 pb-5 text-[14.5px] text-ink-soft">{item.answer}</div>
               </details>

@@ -19,7 +19,7 @@ export function ProblemSolution({ items }: { items: ProblemSolutionItem[] }) {
               </span>
               <h3 className="mt-2.5 mb-2 font-heading text-xl text-ink">{item.problem}</h3>
               <div className="mt-4 flex items-start gap-2.5 border-t border-line pt-4 text-[14.5px] font-semibold text-primary">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent-ink" />
                 {item.solution}
               </div>
             </div>

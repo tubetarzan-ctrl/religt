@@ -61,7 +61,7 @@ export function SunniPackageBuilder({ event }: { event: TourEvent | null }) {
               </p>
             </div>
             <Button asChild size="lg" className="rounded-full bg-primary text-on-primary hover:bg-primary-dark">
-              <Link href={`/book/${event.slug}?option=${option}`}>Reserve Seat</Link>
+              <Link href={`/book/${encodeURIComponent(event.slug)}?option=${option}`}>Reserve Seat</Link>
             </Button>
           </div>
         </div>

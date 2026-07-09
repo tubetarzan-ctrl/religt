@@ -22,7 +22,7 @@ import type { Database } from "@/types/database";
 type TourEvent = Database["public"]["Tables"]["tour_events"]["Row"];
 
 const BANK_ACCOUNTS = [
-  { bank: "Meezan Bank", accountTitle: "Religious Tours (Pvt) Ltd", accountNumber: "PK00 MEZN 0000 0000 0000 0000", currency: "PKR" },
+  { bank: "Meezan Bank", accountTitle: "S.Religious Tours", accountNumber: "PK00 MEZN 0000 0000 0000 0000", currency: "PKR" },
 ];
 
 function StepOneSubmit() {

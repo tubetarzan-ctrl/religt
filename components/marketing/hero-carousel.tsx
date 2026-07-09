@@ -75,7 +75,7 @@ export function HeroCarousel({ tours }: { tours: CarouselTour[] }) {
         onTouchStart={() => setPaused(true)}
         onTouchEnd={() => setPaused(false)}
       >
-        <Link href={`/book/${tour.slug}`} className="block">
+        <Link href={`/book/${encodeURIComponent(tour.slug)}`} className="block">
           <div className="relative h-56 sm:h-64">
             {tour.posterUrl ? (
               <Image src={tour.posterUrl} alt={tour.title} fill sizes="(max-width: 640px) 100vw, 480px" className="object-cover" />

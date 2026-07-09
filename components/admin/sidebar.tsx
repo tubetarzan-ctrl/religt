@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { signOut } from "@/lib/actions/auth";
@@ -47,9 +48,14 @@ export function AdminSidebar({ role }: { role: Role }) {
 
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-white/10 bg-brand-bg-elevated">
-      <div className="px-5 py-6">
-        <p className="font-heading text-lg text-brand-text">Religious Tours</p>
-        <p className="text-xs text-brand-text-muted">Admin Panel</p>
+      <div className="flex items-center gap-3 px-5 py-6">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm">
+          <Image src="/logo.jpg" alt="S.Religious Tours logo" width={40} height={40} className="h-full w-full object-cover" />
+        </span>
+        <div>
+          <p className="font-heading text-lg text-brand-text">S.Religious Tours</p>
+          <p className="text-xs text-brand-text-muted">Admin Panel</p>
+        </div>
       </div>
       <nav className="flex-1 space-y-1 px-3">
         {navItems

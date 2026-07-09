@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { syncTourEventKnowledge } from "@/lib/chatbot/knowledge-sync";
+import { slugify } from "@/lib/slugify";
 
 export interface TourEventFormState {
   status: "idle" | "error";
@@ -14,7 +16,7 @@ function parseTourEventForm(formData: FormData) {
     vertical: String(formData.get("vertical")),
     sect: String(formData.get("sect")),
     title: String(formData.get("title")),
-    slug: String(formData.get("slug")),
+    slug: slugify(String(formData.get("slug") || formData.get("title") || "")),
     start_date: String(formData.get("start_date")),
     end_date: String(formData.get("end_date")),
     duration_days: Number(formData.get("duration_days")) || null,
@@ -40,6 +42,8 @@ export async function createTourEvent(
     return { status: "error", message: error.message };
   }
 
+  await syncTourEventKnowledge(data.id);
+
   revalidatePath("/admin/tour-events");
   redirect(`/admin/tour-events/${data.id}`);
 }
@@ -56,6 +60,8 @@ export async function updateTourEvent(
   if (error) {
     return { status: "error", message: error.message };
   }
+
+  await syncTourEventKnowledge(id);
 
   revalidatePath("/admin/tour-events");
   revalidatePath(`/admin/tour-events/${id}`);

@@ -65,7 +65,7 @@ export async function GallerySection({ slug }: { slug: string }) {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent from-45% to-black/55" />
                   <span className="relative text-[13px] font-semibold text-white">
-                    {CATEGORY_LABEL[image.category ?? ""] ?? "Religious Tours"}
+                    {CATEGORY_LABEL[image.category ?? ""] ?? "S.Religious Tours"}
                   </span>
                 </div>
               </FadeIn>

@@ -44,7 +44,19 @@ export function KnowledgeBaseManager({ entries }: { entries: any[] }) {
         {entries.map((entry) => (
           <div key={entry.id} className="flex items-center justify-between rounded-md border border-white/10 bg-brand-bg p-3">
             <div>
-              <p className="text-sm text-brand-text">{entry.question_pattern}</p>
+              <div className="flex items-center gap-2">
+                <p className="text-sm text-brand-text">{entry.question_pattern}</p>
+                {entry.source === "tour_event_sync" && (
+                  <span className="rounded-full bg-brand-primary/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-primary">
+                    Auto-synced
+                  </span>
+                )}
+                {entry.source === "ai_cache" && (
+                  <span className="rounded-full bg-brand-accent/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-ink">
+                    AI-cached
+                  </span>
+                )}
+              </div>
               <p className="text-xs text-brand-text-muted">{entry.answer}</p>
               <p className="text-xs text-brand-text-muted">Hit count: {entry.hit_count}</p>
             </div>

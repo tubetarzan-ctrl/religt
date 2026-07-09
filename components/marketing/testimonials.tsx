@@ -87,7 +87,7 @@ export async function Testimonials({ slug }: { slug: string }) {
               <span className="text-[#EA4335]">e</span>
             </span>
             rating <strong className="text-ink">{average.toFixed(1)}</strong>
-            <span className="flex gap-0.5 text-accent">
+            <span className="flex gap-0.5 text-accent-ink">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className={`h-3.5 w-3.5 ${i < Math.round(average) ? "fill-current" : ""}`} />
               ))}

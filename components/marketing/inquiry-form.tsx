@@ -30,7 +30,10 @@ export function InquiryForm({
 }) {
   const [state, formAction] = useFormState(submitInquiry, initialState);
   const calLink = process.env.NEXT_PUBLIC_CALCOM_LINK || "#inquiry";
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
+  const whatsappNumber =
+    vertical === "sunni_group"
+      ? process.env.NEXT_PUBLIC_WHATSAPP_NUMBER_SUNNI ?? ""
+      : process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
 
   return (
     <div className="rounded-[18px] bg-surface p-[34px] text-ink shadow-card-lg">

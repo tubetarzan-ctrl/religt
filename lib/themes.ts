@@ -21,6 +21,10 @@ export const THEMES: ThemeMeta[] = [
   { id: "midnight-silver", name: "Midnight Silver", colors: ["#8FA6D9", "#C8CEDC", "#0E1220"] },
   { id: "teal-coral", name: "Teal & Coral", colors: ["#0E7C7B", "#E4674E", "#F6FAF9"] },
   { id: "mono-slate", name: "Mono Slate", colors: ["#2E3B47", "#6B7B8C", "#F4F5F6"] },
+  { id: "rose-quartz", name: "Rose Quartz", colors: ["#9C3A5B", "#C68A5D", "#FBF5F6"] },
+  { id: "ottoman-turquoise", name: "Ottoman Turquoise", colors: ["#0D7A72", "#C87B3E", "#F3FAFA"] },
+  { id: "amber-dusk", name: "Amber Dusk", colors: ["#D9762E", "#B69AE0", "#17110D"] },
+  { id: "slate-jade", name: "Slate Jade", colors: ["#1F6B4A", "#A67C3D", "#F5F8F6"] },
 ];
 
 export const DEFAULT_THEME = "emerald-gold";

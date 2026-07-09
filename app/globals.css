@@ -26,7 +26,9 @@
   --hero-g1: #0a4f44; --hero-g2: #0e6b5c; --hero-g3: #12806e;
   --hero-text: #d7e6e1; --hero-muted: #bfd6cf;
   --footer-bg: #10221e; --footer-text: #9fb8b1;
-  --on-primary: #ffffff; --on-accent: #ffffff;
+  /* on-accent was #FFFFFF — white on this gold is 2.4:1 (WCAG AA needs 4.5:1),
+     unreadable on gold buttons/badges. Using the theme's own dark ink instead. */
+  --on-primary: #ffffff; --on-accent: #1c2a27;
 }
 body[data-theme="pure-light"] {
   --bg: #f7f9fb; --surface: #ffffff;
@@ -36,7 +38,7 @@ body[data-theme="pure-light"] {
   --hero-g1: #0a5490; --hero-g2: #0f6fb8; --hero-g3: #1b84d4;
   --hero-text: #d9e9f6; --hero-muted: #bfd9ee;
   --footer-bg: #122334; --footer-text: #9db2c4;
-  --on-primary: #ffffff; --on-accent: #ffffff;
+  --on-primary: #ffffff; --on-accent: #152230;
 }
 body[data-theme="dark-emerald"] {
   --bg: #0d1613; --surface: #14211d;
@@ -66,7 +68,7 @@ body[data-theme="royal-navy"] {
   --hero-g1: #122043; --hero-g2: #1b2e5b; --hero-g3: #27407a;
   --hero-text: #d5ddec; --hero-muted: #aebad3;
   --footer-bg: #0e1731; --footer-text: #94a1bb;
-  --on-primary: #ffffff; --on-accent: #ffffff;
+  --on-primary: #ffffff; --on-accent: #18202e;
 }
 body[data-theme="karbala-maroon"] {
   --bg: #fbf6f3; --surface: #ffffff;
@@ -76,7 +78,7 @@ body[data-theme="karbala-maroon"] {
   --hero-g1: #5c1620; --hero-g2: #7a1f2b; --hero-g3: #93293a;
   --hero-text: #f0dbde; --hero-muted: #d7b3b8;
   --footer-bg: #2a0f14; --footer-text: #b39397;
-  --on-primary: #ffffff; --on-accent: #ffffff;
+  --on-primary: #ffffff; --on-accent: #2a1b1d;
 }
 body[data-theme="desert-sand"] {
   --bg: #f6f1e7; --surface: #fffdf8;
@@ -106,7 +108,7 @@ body[data-theme="teal-coral"] {
   --hero-g1: #0a5e5d; --hero-g2: #0e7c7b; --hero-g3: #13a09e;
   --hero-text: #d2ecec; --hero-muted: #a6d4d2;
   --footer-bg: #0c2b2a; --footer-text: #8db0ae;
-  --on-primary: #ffffff; --on-accent: #ffffff;
+  --on-primary: #ffffff; --on-accent: #173230;
 }
 body[data-theme="mono-slate"] {
   --bg: #f4f5f6; --surface: #ffffff;
@@ -116,7 +118,49 @@ body[data-theme="mono-slate"] {
   --hero-g1: #1f2a34; --hero-g2: #2e3b47; --hero-g3: #3d4e5e;
   --hero-text: #d6dde3; --hero-muted: #a9b5c0;
   --footer-bg: #141c24; --footer-text: #8b99a7;
+  /* accent here is mid-gray, not light gold like the other themes — white
+     text (4.34:1) is actually the better option, dark ink makes it worse. */
   --on-primary: #ffffff; --on-accent: #ffffff;
+}
+body[data-theme="rose-quartz"] {
+  --bg: #fbf5f6; --surface: #ffffff;
+  --primary: #9c3a5b; --primary-dark: #7a2c46; --primary-soft: #f5e3e9;
+  --accent: #c68a5d; --accent-soft: #f3e4d8; --accent-ink: #6b4526;
+  --ink: #2a1620; --ink-soft: #6e5560; --line: #ebdde1;
+  --hero-g1: #5c1d33; --hero-g2: #7a2c46; --hero-g3: #9c3a5b;
+  --hero-text: #f0dce3; --hero-muted: #d6b3c0;
+  --footer-bg: #24101a; --footer-text: #b399a3;
+  --on-primary: #ffffff; --on-accent: #2a1620;
+}
+body[data-theme="ottoman-turquoise"] {
+  --bg: #f3fafa; --surface: #ffffff;
+  --primary: #0d7a72; --primary-dark: #095b55; --primary-soft: #ddf0ee;
+  --accent: #c87b3e; --accent-soft: #f3e2d2; --accent-ink: #7a4d23;
+  --ink: #142826; --ink-soft: #56706c; --line: #dcebe9;
+  --hero-g1: #095b55; --hero-g2: #0d7a72; --hero-g3: #129a8f;
+  --hero-text: #d3eeec; --hero-muted: #a6d6d1;
+  --footer-bg: #0a2422; --footer-text: #8fb3af;
+  --on-primary: #ffffff; --on-accent: #142826;
+}
+body[data-theme="amber-dusk"] {
+  --bg: #17110d; --surface: #211812;
+  --primary: #d9762e; --primary-dark: #b85f1f; --primary-soft: #3a2415;
+  --accent: #b69ae0; --accent-soft: #2e2440; --accent-ink: #b69ae0;
+  --ink: #f5ede4; --ink-soft: #a89a8c; --line: #3a2e24;
+  --hero-g1: #120d0a; --hero-g2: #241a10; --hero-g3: #3d2814;
+  --hero-text: #e8d6c4; --hero-muted: #b39a82;
+  --footer-bg: #0e0a07; --footer-text: #8c7a6c;
+  --on-primary: #1a0f04; --on-accent: #1a1428;
+}
+body[data-theme="slate-jade"] {
+  --bg: #f5f8f6; --surface: #ffffff;
+  --primary: #1f6b4a; --primary-dark: #164e36; --primary-soft: #e1f0e7;
+  --accent: #a67c3d; --accent-soft: #f0e6d3; --accent-ink: #5c4220;
+  --ink: #16241c; --ink-soft: #56695f; --line: #dfeae3;
+  --hero-g1: #164e36; --hero-g2: #1f6b4a; --hero-g3: #278a5f;
+  --hero-text: #d3e9dd; --hero-muted: #a8cfb9;
+  --footer-bg: #0f231a; --footer-text: #8faf9d;
+  --on-primary: #ffffff; --on-accent: #000000;
 }
 
 @layer base {

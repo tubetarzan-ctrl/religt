@@ -1,7 +1,13 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 export function WhatsappBubble({ context }: { context: string }) {
-  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
+  const pathname = usePathname();
+  const isSunniGroupTours = pathname?.startsWith("/sunni-group-tours");
+  const number = isSunniGroupTours
+    ? process.env.NEXT_PUBLIC_WHATSAPP_NUMBER_SUNNI ?? ""
+    : process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
   const message = encodeURIComponent(`Assalam-o-Alaikum, I'm interested in ${context}.`);
   const href = `https://wa.me/${number}?text=${message}`;
 

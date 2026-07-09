@@ -58,7 +58,7 @@ export function TextReviewCard({
 }) {
   return (
     <div className="flex h-full flex-col gap-3.5 rounded-2xl border border-line bg-surface p-[26px] shadow-card">
-      <div className="flex gap-0.5 text-accent">
+      <div className="flex gap-0.5 text-accent-ink">
         {Array.from({ length: rating }).map((_, i) => (
           <Star key={i} className="h-4 w-4 fill-current" />
         ))}
