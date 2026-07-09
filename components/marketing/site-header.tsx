@@ -27,11 +27,14 @@ export function SiteHeader() {
   return (
     <nav className="sticky top-0 z-40 border-b border-line bg-bg/90 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5 whitespace-nowrap font-heading text-2xl text-primary">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5 whitespace-nowrap">
           <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm transition-transform duration-300 hover:rotate-[8deg] hover:scale-110">
             <Image src="/logo.jpg" alt="S.Religious Tours logo" width={36} height={36} className="h-full w-full object-cover" priority />
           </span>
-          S.Religious Tours
+          <span className="leading-tight">
+            <span className="block font-heading text-2xl text-primary">S.Religious Tours</span>
+            <span className="block text-[10px] font-semibold uppercase tracking-wide text-ink-soft">Govt. License GL#5635</span>
+          </span>
         </Link>
 
         <div className="hidden gap-5 whitespace-nowrap text-[14px] font-semibold text-ink-soft xl:flex xl:gap-6">
