@@ -56,7 +56,7 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="preconnect" href="https://www.google.com" />
       </head>
-      <body data-theme={activeTheme} className="font-body antialiased bg-background text-foreground">
+      <body data-theme={activeTheme} className="font-body antialiased bg-bg text-ink">
         <Suspense fallback={null}>
           <ThemePreviewOverride />
         </Suspense>

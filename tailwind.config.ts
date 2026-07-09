@@ -59,6 +59,7 @@ const config: Config = {
         },
         // Section 5.4 theme-engine tokens, used directly by the hero carousel,
         // footer, and anywhere else that needs the prototype's exact palette.
+        bg: "var(--bg)",
         surface: "var(--surface)",
         ink: {
           DEFAULT: "var(--ink)",
