@@ -40,7 +40,7 @@ export async function syncTourEventKnowledge(tourEventId: string) {
   const entries: { question_pattern: string; answer: string }[] = [];
 
   entries.push({
-    question_pattern: `${event.title} price cost fee package how much`,
+    question_pattern: `${event.title} ${verticalLabel} price cost fee package how much tour`,
     answer:
       `${event.title} (${verticalLabel}) costs ${formatMoney(event.price_amount, event.currency)} per person` +
       (event.early_bird_price
@@ -49,14 +49,14 @@ export async function syncTourEventKnowledge(tourEventId: string) {
   });
 
   entries.push({
-    question_pattern: `${event.title} date schedule when departure return start end`,
+    question_pattern: `${event.title} ${verticalLabel} date schedule when departure return start end tour upcoming`,
     answer:
       `${event.title} departs on ${dateFmt.format(new Date(event.start_date))} and returns on ${dateFmt.format(new Date(event.end_date))}` +
       (event.duration_days ? ` (${event.duration_days} days).` : "."),
   });
 
   entries.push({
-    question_pattern: `${event.title} seats available spots left capacity full booked`,
+    question_pattern: `${event.title} ${verticalLabel} seats available spots left capacity full booked tour`,
     answer:
       seatsLeft > 0
         ? `${event.title} currently has ${seatsLeft} seat(s) left out of ${event.capacity}.`
