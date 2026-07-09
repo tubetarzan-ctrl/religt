@@ -16,3 +16,31 @@ export async function getActiveTheme(): Promise<string> {
     return DEFAULT_THEME;
   }
 }
+
+const DEFAULT_ANNOUNCEMENT = "📢 Next Karbala group departs 14 Aug 2026 — only 6 seats left";
+
+/** Same cookie-free admin-client pattern as getActiveTheme — read-only, RLS
+ * lets anyone read site_settings, so this doesn't force dynamic rendering. */
+export async function getAnnouncementBarText(): Promise<string> {
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase.from("site_settings").select("value").eq("key", "announcement_bar_text").maybeSingle();
+    const value = data?.value as string | undefined;
+    return value || DEFAULT_ANNOUNCEMENT;
+  } catch {
+    return DEFAULT_ANNOUNCEMENT;
+  }
+}
+
+/** Admin-uploaded overrides for the 6 homepage vertical tiles, keyed by
+ * vertical slug. Falls back to the bundled stock photo in /public when a
+ * vertical has no override yet, so tiles never render blank. */
+export async function getVerticalTileImages(): Promise<Record<string, string>> {
+  try {
+    const supabase = createAdminClient();
+    const { data } = await supabase.from("site_settings").select("value").eq("key", "vertical_tile_images").maybeSingle();
+    return (data?.value as Record<string, string> | undefined) ?? {};
+  } catch {
+    return {};
+  }
+}

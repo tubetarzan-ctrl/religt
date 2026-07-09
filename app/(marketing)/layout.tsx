@@ -3,11 +3,14 @@ import { SiteHeader } from "@/components/marketing/site-header";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { WhatsappBubble } from "@/components/marketing/whatsapp-bubble";
 import { ChatWidget } from "@/components/marketing/chat-widget";
+import { getAnnouncementBarText } from "@/lib/site-settings";
 
-export default function MarketingLayout({ children }: { children: React.ReactNode }) {
+export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
+  const announcement = await getAnnouncementBarText();
+
   return (
     <div className="flex min-h-screen flex-col">
-      <Topbar announcement="📢 Next Karbala group departs 14 Aug 2026 — only 6 seats left" />
+      <Topbar announcement={announcement} />
       <SiteHeader />
       <main className="flex-1">{children}</main>
       <SiteFooter />

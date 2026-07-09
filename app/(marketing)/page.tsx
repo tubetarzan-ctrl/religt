@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FeatureStrip } from "@/components/marketing/feature-strip";
 import { WhyUs } from "@/components/marketing/why-us";
 import { FadeIn } from "@/components/marketing/fade-in";
 import { verticals, sunniGroupTours } from "@/lib/content/verticals";
+import { getVerticalTileImages } from "@/lib/site-settings";
 
 export const revalidate = 60;
 
@@ -23,7 +25,9 @@ const allCards = [
   verticals["visas"],
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const tileImages = await getVerticalTileImages();
+
   return (
     <>
       <header
@@ -85,11 +89,16 @@ export default function HomePage() {
                   href={`/${card.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card transition-all hover:-translate-y-1.5 hover:shadow-card-lg"
                 >
-                  <div
-                    className="flex h-[140px] items-end p-4"
-                    style={{ background: "linear-gradient(35deg, var(--hero-g1), var(--hero-g3))" }}
-                  >
-                    <span className="rounded-md bg-black/35 px-2.5 py-1.5 text-xs text-white/85">
+                  <div className="relative flex h-[140px] items-end p-4">
+                    <Image
+                      src={tileImages[card.slug] || `/images/verticals/${card.slug}.jpg`}
+                      alt={card.navLabel}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    <span className="relative rounded-md bg-black/35 px-2.5 py-1.5 text-xs text-white/85">
                       {card.heroEyebrow}
                     </span>
                   </div>
