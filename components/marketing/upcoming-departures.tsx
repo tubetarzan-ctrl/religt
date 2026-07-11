@@ -1,10 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { formatMoney } from "@/lib/money";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/marketing/fade-in";
 import { Carousel } from "@/components/marketing/carousel";
+import { DeparturePoster } from "@/components/marketing/departure-poster";
 import type { Vertical } from "@/types/database";
 
 const DEFAULT_INCLUSIONS = ["Visa", "Flights", "Hotels", "All meals", "Guide", "Transport"];
@@ -29,9 +29,7 @@ function DepartureCard({ event }: { event: any }) {
         className="relative h-[190px]"
         style={event.poster_image_url ? undefined : { background: "linear-gradient(35deg, var(--hero-g1), var(--hero-g3))" }}
       >
-        {event.poster_image_url && (
-          <Image src={event.poster_image_url} alt={event.title} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover" />
-        )}
+        {event.poster_image_url && <DeparturePoster posterUrl={event.poster_image_url} title={event.title} />}
         <span
           className={`absolute left-3.5 top-3.5 rounded-full px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wide ${
             badge.hot ? "bg-[#C0392B] text-white" : "bg-accent text-on-accent"
