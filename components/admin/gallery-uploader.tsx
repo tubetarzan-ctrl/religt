@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Upload } from "lucide-react";
 import { UploadButton } from "@/lib/uploadthing";
 import { addGalleryImage, addGalleryVideo } from "@/lib/actions/admin-gallery";
 import { allLandingSlugs } from "@/lib/content/verticals";
@@ -51,6 +52,21 @@ export function GalleryUploader() {
       </Select>
       <UploadButton
         endpoint="galleryImage"
+        content={{
+          button: (
+            <span className="flex items-center gap-2">
+              <Upload className="h-4 w-4" />
+              Upload Image(s)
+            </span>
+          ),
+          allowedContent: "Images up to 8MB, max 20",
+        }}
+        appearance={{
+          button:
+            "bg-brand-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-brand-primary/90 ut-uploading:bg-brand-primary/60 ut-readying:bg-brand-primary/60",
+          allowedContent: "text-xs text-brand-text-muted",
+          container: "items-start",
+        }}
         onClientUploadComplete={async (res) => {
           for (const file of res) {
             await addGalleryImage(slug, category, file.url);
