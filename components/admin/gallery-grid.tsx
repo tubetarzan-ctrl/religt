@@ -6,15 +6,27 @@ import { Play } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { toggleGalleryImageVisibility, deleteGalleryImage } from "@/lib/actions/admin-gallery";
+import { useLightbox, type LightboxItem } from "@/components/lightbox";
 
 export function GalleryGrid({ images }: { images: any[] }) {
   const [pending, startTransition] = useTransition();
+  const { open } = useLightbox();
+
+  const items: LightboxItem[] = images.map((image) =>
+    image.media_type === "youtube"
+      ? { type: "youtube", src: image.youtube_video_id, alt: image.category ?? "Video" }
+      : { type: "image", src: image.image_url, alt: image.category ?? "" }
+  );
 
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6">
-      {images.map((image) => (
+      {images.map((image, i) => (
         <div key={image.id} className="space-y-2">
-          <div className="relative aspect-square overflow-hidden rounded-brand bg-brand-bg-elevated">
+          <button
+            type="button"
+            onClick={() => open(items, i)}
+            className="relative block aspect-square w-full overflow-hidden rounded-brand bg-brand-bg-elevated"
+          >
             {image.media_type === "youtube" ? (
               <>
                 <Image
@@ -31,7 +43,7 @@ export function GalleryGrid({ images }: { images: any[] }) {
             ) : (
               <Image src={image.image_url} alt={image.category ?? ""} fill sizes="200px" className="object-cover" />
             )}
-          </div>
+          </button>
           <p className="truncate text-xs text-brand-text-muted">{image.landing_page_slug}</p>
           <div className="flex gap-1">
             <Button

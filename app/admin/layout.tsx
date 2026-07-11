@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { AdminSidebar } from "@/components/admin/sidebar";
 import { AdminThemeWrapper } from "@/components/admin/theme-toggle-wrapper";
+import { LightboxProvider } from "@/components/lightbox";
 import type { Role } from "@/types/database";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -21,9 +22,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (!profile) redirect("/admin/login");
 
   return (
-    <AdminThemeWrapper>
-      <AdminSidebar role={profile.role as Role} />
-      <main className="flex-1 overflow-y-auto p-8">{children}</main>
-    </AdminThemeWrapper>
+    <LightboxProvider>
+      <AdminThemeWrapper>
+        <AdminSidebar role={profile.role as Role} />
+        <main className="flex-1 overflow-y-auto p-8">{children}</main>
+      </AdminThemeWrapper>
+    </LightboxProvider>
   );
 }

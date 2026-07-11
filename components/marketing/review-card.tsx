@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { Play, Star } from "lucide-react";
+import { useLightbox } from "@/components/lightbox";
 
 function initials(name: string) {
   return name
@@ -14,26 +14,12 @@ function initials(name: string) {
 }
 
 export function VideoReviewCard({ title, meta, youtubeVideoId }: { title: string; meta: string; youtubeVideoId: string }) {
-  const [playing, setPlaying] = useState(false);
-
-  if (playing) {
-    return (
-      <div className="aspect-square overflow-hidden rounded-2xl shadow-card sm:aspect-auto sm:min-h-[280px]">
-        <iframe
-          className="h-full min-h-[280px] w-full"
-          src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}?autoplay=1`}
-          title={title}
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-        />
-      </div>
-    );
-  }
+  const { open } = useLightbox();
 
   return (
     <button
       type="button"
-      onClick={() => setPlaying(true)}
+      onClick={() => open([{ type: "youtube", src: youtubeVideoId, alt: title }])}
       className="relative flex min-h-[280px] flex-col items-center justify-center overflow-hidden rounded-2xl p-6 text-center text-white shadow-card transition-transform hover:scale-[1.01]"
       style={{ background: "linear-gradient(140deg, var(--hero-g1), var(--hero-g3))" }}
     >

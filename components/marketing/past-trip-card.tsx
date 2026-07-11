@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { Play } from "lucide-react";
+import { useLightbox } from "@/components/lightbox";
 
 export function PastTripCard({
   title,
@@ -21,28 +21,21 @@ export function PastTripCard({
   youtubeVideoId: string | null;
   background: string;
 }) {
-  const [playing, setPlaying] = useState(false);
-
-  if (playing && youtubeVideoId) {
-    return (
-      <div className="h-[340px] w-[280px] overflow-hidden rounded-2xl shadow-card sm:w-[320px]">
-        <iframe
-          className="h-full w-full"
-          src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}?autoplay=1`}
-          title={title}
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-        />
-      </div>
-    );
-  }
-
+  const { open } = useLightbox();
   const imageSrc = youtubeVideoId ? `https://img.youtube.com/vi/${youtubeVideoId}/hqdefault.jpg` : coverImageUrl;
+
+  const handleClick = () => {
+    if (youtubeVideoId) {
+      open([{ type: "youtube", src: youtubeVideoId, alt: title }]);
+    } else if (coverImageUrl) {
+      open([{ type: "image", src: coverImageUrl, alt: title }]);
+    }
+  };
 
   return (
     <button
       type="button"
-      onClick={() => youtubeVideoId && setPlaying(true)}
+      onClick={handleClick}
       className="relative flex h-[340px] w-[280px] items-end overflow-hidden rounded-2xl text-left shadow-card sm:w-[320px]"
     >
       {imageSrc ? (
