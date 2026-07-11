@@ -1,5 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { FadeIn } from "@/components/marketing/fade-in";
+import { Carousel } from "@/components/marketing/carousel";
+import { PastTripCard } from "@/components/marketing/past-trip-card";
 import type { Vertical } from "@/types/database";
 
 interface DisplayCard {
@@ -8,6 +10,8 @@ interface DisplayCard {
   title: string;
   narrative: string;
   ratingLabel: string | null;
+  coverImageUrl: string | null;
+  youtubeVideoId: string | null;
 }
 
 // Matches the prototype's fixed 3-card gradient variety (.past-card / :nth-child).
@@ -29,7 +33,7 @@ export async function PastTrips({ vertical, slug }: { vertical: Vertical; slug: 
       .eq("landing_page_slug", slug)
       .eq("visible", true)
       .order("sort_order", { ascending: true })
-      .limit(3),
+      .limit(20),
     supabase
       .from("tour_events")
       .select("*")
@@ -45,6 +49,8 @@ export async function PastTrips({ vertical, slug }: { vertical: Vertical; slug: 
     title: c.title,
     narrative: c.narrative ?? "",
     ratingLabel: c.rating_label,
+    coverImageUrl: c.cover_image_url,
+    youtubeVideoId: c.youtube_video_id,
   }));
 
   if (cards.length < 3) {
@@ -56,6 +62,8 @@ export async function PastTrips({ vertical, slug }: { vertical: Vertical; slug: 
         title: event.title,
         narrative: `${event.seats_booked} travelers · ${event.duration_days ?? "—"} days, guided by ${event.guide_name ?? "our senior team"}.`,
         ratingLabel: null,
+        coverImageUrl: event.poster_image_url,
+        youtubeVideoId: null,
       });
     }
   }
@@ -73,28 +81,40 @@ export async function PastTrips({ vertical, slug }: { vertical: Vertical; slug: 
             Every group came home with stories, not complaints.
           </h2>
         </FadeIn>
-        <div className="mt-11 grid gap-6 sm:grid-cols-3">
-          {cards.map((card, i) => (
-            <FadeIn key={card.id} delay={i * 0.08}>
-              <div className="relative flex h-[340px] items-end overflow-hidden rounded-2xl shadow-card">
-                <div className="absolute inset-0" style={{ background: CARD_BACKGROUNDS[i % 3] }} />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-30% to-black/90" />
-                <div className="relative p-6">
-                  {card.monthLabel && (
-                    <p className="text-xs font-bold uppercase tracking-[0.1em] text-accent">{card.monthLabel}</p>
-                  )}
-                  <h3 className="mt-2 mb-1.5 font-heading text-xl text-white">{card.title}</h3>
-                  <p className="text-sm text-[#D5E2DD]">{card.narrative}</p>
-                  {card.ratingLabel && (
-                    <span className="mt-3 inline-flex rounded-full bg-white/15 px-3.5 py-1.5 text-[13px] font-bold text-white backdrop-blur-sm">
-                      {card.ratingLabel}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+        {cards.length > 3 ? (
+          <FadeIn className="mt-11">
+            <Carousel
+              items={cards.map((card, i) => (
+                <PastTripCard
+                  key={card.id}
+                  title={card.title}
+                  narrative={card.narrative}
+                  monthLabel={card.monthLabel}
+                  ratingLabel={card.ratingLabel}
+                  coverImageUrl={card.coverImageUrl}
+                  youtubeVideoId={card.youtubeVideoId}
+                  background={CARD_BACKGROUNDS[i % 3]}
+                />
+              ))}
+            />
+          </FadeIn>
+        ) : (
+          <div className="mt-11 flex flex-wrap gap-6">
+            {cards.map((card, i) => (
+              <FadeIn key={card.id} delay={i * 0.08}>
+                <PastTripCard
+                  title={card.title}
+                  narrative={card.narrative}
+                  monthLabel={card.monthLabel}
+                  ratingLabel={card.ratingLabel}
+                  coverImageUrl={card.coverImageUrl}
+                  youtubeVideoId={card.youtubeVideoId}
+                  background={CARD_BACKGROUNDS[i % 3]}
+                />
+              </FadeIn>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

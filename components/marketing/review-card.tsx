@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Play, Star } from "lucide-react";
 
 function initials(name: string) {
@@ -33,14 +34,22 @@ export function VideoReviewCard({ title, meta, youtubeVideoId }: { title: string
     <button
       type="button"
       onClick={() => setPlaying(true)}
-      className="flex min-h-[280px] flex-col items-center justify-center rounded-2xl p-6 text-center text-white shadow-card transition-transform hover:scale-[1.01]"
+      className="relative flex min-h-[280px] flex-col items-center justify-center overflow-hidden rounded-2xl p-6 text-center text-white shadow-card transition-transform hover:scale-[1.01]"
       style={{ background: "linear-gradient(140deg, var(--hero-g1), var(--hero-g3))" }}
     >
-      <span className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-on-accent shadow-lg">
+      <Image
+        src={`https://img.youtube.com/vi/${youtubeVideoId}/hqdefault.jpg`}
+        alt={title}
+        fill
+        sizes="(max-width: 640px) 100vw, 33vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/70" />
+      <span className="relative mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-on-accent shadow-lg">
         <Play className="h-6 w-6 fill-current" />
       </span>
-      <strong className="text-white">{title}</strong>
-      <em className="mt-1.5 block text-xs not-italic text-hero-muted">{meta}</em>
+      <strong className="relative text-white">{title}</strong>
+      <em className="relative mt-1.5 block text-xs not-italic text-hero-muted">{meta}</em>
     </button>
   );
 }

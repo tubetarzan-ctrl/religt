@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { extractYoutubeId } from "@/lib/youtube";
 
 export interface PastGroupFormState {
   status: "idle" | "error";
@@ -17,6 +18,7 @@ function parseForm(formData: FormData) {
     narrative: String(formData.get("narrative") ?? "") || null,
     rating_label: String(formData.get("rating_label") ?? "") || null,
     cover_image_url: String(formData.get("cover_image_url") ?? "") || null,
+    youtube_input: String(formData.get("youtube_video_id") ?? "").trim(),
     sort_order: Number(formData.get("sort_order") ?? 0),
   };
 }
@@ -25,13 +27,18 @@ export async function createPastGroupCard(
   _prevState: PastGroupFormState,
   formData: FormData
 ): Promise<PastGroupFormState> {
-  const values = parseForm(formData);
+  const { youtube_input, ...values } = parseForm(formData);
   if (!values.landing_page_slug || !values.title) {
     return { status: "error", message: "Landing page and title are required." };
   }
 
+  const youtubeVideoId = youtube_input ? extractYoutubeId(youtube_input) : null;
+  if (youtube_input && !youtubeVideoId) {
+    return { status: "error", message: "Couldn't recognize that YouTube link/ID — paste the full URL or just the 11-character video ID." };
+  }
+
   const admin = createAdminClient();
-  const { error } = await admin.from("past_group_cards").insert(values);
+  const { error } = await admin.from("past_group_cards").insert({ ...values, youtube_video_id: youtubeVideoId });
   if (error) return { status: "error", message: error.message };
 
   revalidatePath("/admin/past-groups");
