@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { extractYoutubeId } from "@/lib/youtube";
 
 export async function approveReview(id: string) {
   const admin = createAdminClient();
@@ -55,10 +56,15 @@ export async function addReviewManually(
   const customerName = String(formData.get("customer_name") ?? "");
   const rating = Number(formData.get("rating") ?? 5);
   const textContent = String(formData.get("text_content") ?? "");
-  const youtubeVideoId = String(formData.get("youtube_video_id") ?? "") || null;
+  const youtubeInput = String(formData.get("youtube_video_id") ?? "").trim();
+  const youtubeVideoId = youtubeInput ? extractYoutubeId(youtubeInput) : null;
 
   if (!landingPageSlug || !customerName) {
     return { status: "error", message: "Landing page and customer name are required." };
+  }
+
+  if (youtubeInput && !youtubeVideoId) {
+    return { status: "error", message: "Couldn't recognize that YouTube link/ID — paste the full URL or just the 11-character video ID." };
   }
 
   const admin = createAdminClient();

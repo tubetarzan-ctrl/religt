@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useTransition } from "react";
+import { Play } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { toggleGalleryImageVisibility, deleteGalleryImage } from "@/lib/actions/admin-gallery";
@@ -14,7 +15,22 @@ export function GalleryGrid({ images }: { images: any[] }) {
       {images.map((image) => (
         <div key={image.id} className="space-y-2">
           <div className="relative aspect-square overflow-hidden rounded-brand bg-brand-bg-elevated">
-            <Image src={image.image_url} alt={image.category ?? ""} fill sizes="200px" className="object-cover" />
+            {image.media_type === "youtube" ? (
+              <>
+                <Image
+                  src={`https://img.youtube.com/vi/${image.youtube_video_id}/hqdefault.jpg`}
+                  alt={image.category ?? "YouTube video"}
+                  fill
+                  sizes="200px"
+                  className="object-cover"
+                />
+                <span className="absolute inset-0 flex items-center justify-center bg-black/25">
+                  <Play className="h-8 w-8 fill-white text-white" />
+                </span>
+              </>
+            ) : (
+              <Image src={image.image_url} alt={image.category ?? ""} fill sizes="200px" className="object-cover" />
+            )}
           </div>
           <p className="truncate text-xs text-brand-text-muted">{image.landing_page_slug}</p>
           <div className="flex gap-1">

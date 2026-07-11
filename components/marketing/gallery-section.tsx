@@ -2,6 +2,7 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { SceneArt } from "@/components/marketing/scene-art";
 import { FadeIn } from "@/components/marketing/fade-in";
+import { GalleryVideoTile } from "@/components/marketing/gallery-video-tile";
 
 // Matches the prototype's fixed 6-tile gradient variety (.gal-item nth-child).
 const TILE_BACKGROUNDS = [
@@ -47,8 +48,9 @@ export async function GallerySection({ slug }: { slug: string }) {
         </FadeIn>
         <div className="mt-11 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:[grid-auto-rows:170px]">
           {images.map((image, i) => {
-            const isRealUpload = image.image_url.startsWith("http");
+            const isRealUpload = image.media_type !== "youtube" && !!image.image_url?.startsWith("http");
             const shape = TILE_SHAPE[i % TILE_SHAPE.length];
+            const label = CATEGORY_LABEL[image.category ?? ""] ?? "S.Religious Tours";
             return (
               <FadeIn
                 key={image.id}
@@ -56,17 +58,23 @@ export async function GallerySection({ slug }: { slug: string }) {
                 className={shape === "tall" ? "row-span-2" : shape === "wide" ? "col-span-2" : ""}
               >
                 <div className="relative flex h-full min-h-[170px] items-end overflow-hidden rounded-xl p-3.5">
-                  {isRealUpload ? (
-                    <Image src={image.image_url} alt={CATEGORY_LABEL[image.category ?? ""] ?? ""} fill sizes="25vw" className="object-cover" />
+                  {image.media_type === "youtube" && image.youtube_video_id ? (
+                    <GalleryVideoTile videoId={image.youtube_video_id} label={label} />
+                  ) : isRealUpload ? (
+                    <>
+                      <Image src={image.image_url!} alt={label} fill sizes="25vw" className="object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent from-45% to-black/55" />
+                      <span className="relative text-[13px] font-semibold text-white">{label}</span>
+                    </>
                   ) : (
-                    <div className="absolute inset-0" style={{ background: TILE_BACKGROUNDS[i % TILE_BACKGROUNDS.length] }}>
-                      <SceneArt variant="dome" className="h-full w-full opacity-70" />
-                    </div>
+                    <>
+                      <div className="absolute inset-0" style={{ background: TILE_BACKGROUNDS[i % TILE_BACKGROUNDS.length] }}>
+                        <SceneArt variant="dome" className="h-full w-full opacity-70" />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent from-45% to-black/55" />
+                      <span className="relative text-[13px] font-semibold text-white">{label}</span>
+                    </>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent from-45% to-black/55" />
-                  <span className="relative text-[13px] font-semibold text-white">
-                    {CATEGORY_LABEL[image.category ?? ""] ?? "S.Religious Tours"}
-                  </span>
                 </div>
               </FadeIn>
             );

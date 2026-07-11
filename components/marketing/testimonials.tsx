@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { ReviewSubmissionDialog } from "@/components/marketing/review-submission-form";
-import { VideoReviewCard, TextReviewCard } from "@/components/marketing/review-card";
+import { ReviewsCarousel, type ReviewCardData } from "@/components/marketing/reviews-carousel";
 import { FadeIn } from "@/components/marketing/fade-in";
 
 export async function Testimonials({ slug }: { slug: string }) {
@@ -12,7 +12,7 @@ export async function Testimonials({ slug }: { slug: string }) {
     .eq("landing_page_slug", slug)
     .eq("published", true)
     .order("created_at", { ascending: false })
-    .limit(9);
+    .limit(50);
 
   const { data: tourEvents } = await supabase
     .from("tour_events")
@@ -20,8 +20,28 @@ export async function Testimonials({ slug }: { slug: string }) {
     .eq("status", "upcoming");
 
   const allReviews = reviews ?? [];
-  const videoReview = allReviews.find((r) => r.youtube_video_id && r.video_status === "ready");
-  const textReviews = allReviews.filter((r) => r.id !== videoReview?.id).slice(0, videoReview ? 2 : 3);
+  const videoReviews = allReviews.filter((r) => r.youtube_video_id && r.video_status === "ready");
+  const textReviews = allReviews.filter((r) => !(r.youtube_video_id && r.video_status === "ready"));
+
+  const cards: ReviewCardData[] = [
+    ...videoReviews.map((r): ReviewCardData => ({
+      id: r.id,
+      kind: "video",
+      rating: r.rating ?? 5,
+      text: "",
+      name: r.customer_name ?? "Traveler",
+      meta: "Video review",
+      youtubeVideoId: r.youtube_video_id!,
+    })),
+    ...textReviews.map((r): ReviewCardData => ({
+      id: r.id,
+      kind: "text",
+      rating: r.rating ?? 5,
+      text: r.text_content ?? "",
+      name: r.customer_name ?? "Verified traveler",
+      meta: new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric" }).format(new Date(r.created_at)),
+    })),
+  ];
 
   const ratings = allReviews.map((r) => r.rating ?? 5);
   const average = ratings.length > 0 ? ratings.reduce((s, r) => s + r, 0) / ratings.length : null;
@@ -41,27 +61,9 @@ export async function Testimonials({ slug }: { slug: string }) {
         {allReviews.length === 0 ? (
           <p className="mt-10 text-ink-soft">Be the first to share your experience with this group.</p>
         ) : (
-          <div className="mt-11 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {videoReview && (
-              <FadeIn>
-                <VideoReviewCard
-                  title={`Watch: ${videoReview.customer_name ?? "Traveler"}'s experience`}
-                  meta="Video review"
-                  youtubeVideoId={videoReview.youtube_video_id!}
-                />
-              </FadeIn>
-            )}
-            {textReviews.map((review, i) => (
-              <FadeIn key={review.id} delay={i * 0.06}>
-                <TextReviewCard
-                  rating={review.rating ?? 5}
-                  text={review.text_content ?? ""}
-                  name={review.customer_name ?? "Verified traveler"}
-                  meta={new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric" }).format(new Date(review.created_at))}
-                />
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn className="mt-11">
+            <ReviewsCarousel cards={cards} />
+          </FadeIn>
         )}
 
         <FadeIn>

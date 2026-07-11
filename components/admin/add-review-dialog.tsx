@@ -68,8 +68,8 @@ export function AddReviewDialog() {
             <Textarea id="text_content" name="text_content" rows={3} />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="youtube_video_id">YouTube Video ID (unlisted, optional)</Label>
-            <Input id="youtube_video_id" name="youtube_video_id" placeholder="e.g. dQw4w9WgXcQ" />
+            <Label htmlFor="youtube_video_id">YouTube Video URL or ID (unlisted, optional)</Label>
+            <Input id="youtube_video_id" name="youtube_video_id" placeholder="e.g. https://youtu.be/dQw4w9WgXcQ or dQw4w9WgXcQ" />
           </div>
           <SubmitButton />
         </form>

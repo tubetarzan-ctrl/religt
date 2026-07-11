@@ -170,14 +170,14 @@ export interface Database {
           id: string;
           landing_page_slug: string | null;
           category: "hotel" | "shrine" | "group_photo" | null;
-          image_url: string;
+          image_url: string | null;
+          media_type: "image" | "youtube";
+          youtube_video_id: string | null;
           visible: boolean;
           sort_order: number;
           created_at: string;
         };
-        Insert: Partial<Database["public"]["Tables"]["gallery_images"]["Row"]> & {
-          image_url: string;
-        };
+        Insert: Partial<Database["public"]["Tables"]["gallery_images"]["Row"]>;
         Update: Partial<Database["public"]["Tables"]["gallery_images"]["Row"]>;
       };
       inquiries: {
